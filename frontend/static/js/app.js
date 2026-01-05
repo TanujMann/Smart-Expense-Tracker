@@ -1,4 +1,7 @@
-// ---------------- ELEMENTS ----------------
+// ================= BASE URL (RENDER BACKEND) =================
+const BASE_URL = "https://smart-expense-tracker-1-rcqq.onrender.com";
+
+// ================= ELEMENTS =================
 const memeBox = document.getElementById("memeBox");
 const amountInput = document.getElementById("amount");
 const merchantInput = document.getElementById("merchant");
@@ -7,12 +10,12 @@ const addBtn = document.getElementById("addExpense");
 const messageBox = document.getElementById("message");
 const summaryBox = document.getElementById("aiSummary");
 
-// ---------------- AUTO PREDICT CATEGORY ----------------
+// ================= AUTO PREDICT CATEGORY =================
 merchantInput.addEventListener("input", async () => {
   const merchant = merchantInput.value.trim();
   if (merchant.length < 3) return;
 
-  const res = await fetch("/predict", {
+  const res = await fetch(`${BASE_URL}/predict`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ merchant })
@@ -22,7 +25,7 @@ merchantInput.addEventListener("input", async () => {
   categoryInput.value = data.category;
 });
 
-// ---------------- ADD EXPENSE ----------------
+// ================= ADD EXPENSE =================
 addBtn.addEventListener("click", async () => {
   const amount = amountInput.value;
   const merchant = merchantInput.value;
@@ -35,7 +38,7 @@ addBtn.addEventListener("click", async () => {
   }
 
   // ✅ Save expense
-  await fetch("/add-expense", {
+  await fetch(`${BASE_URL}/add-expense`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ amount, merchant, category })
@@ -43,15 +46,16 @@ addBtn.addEventListener("click", async () => {
 
   messageBox.innerText = "✅ Expense added successfully";
 
-  // ✅ Meme
-  const memeRes = await fetch(`/meme/${category}`);
+  // ✅ Fetch meme
+  const memeRes = await fetch(`${BASE_URL}/meme/${category}`);
   const memeData = await memeRes.json();
   memeBox.innerText = "😂 " + memeData.meme;
 
-  // ✅ AI Summary
-  const summaryRes = await fetch("/summary");
+  // ✅ Fetch AI Summary
+  const summaryRes = await fetch(`${BASE_URL}/summary`);
   const summaryData = await summaryRes.json();
-  summaryBox.innerHTML = "🧠 <b>AI Summary:</b><br>" + summaryData.summary;
+  summaryBox.innerHTML =
+    "🧠 <b>AI Summary:</b><br>" + summaryData.summary;
 
   // ✅ Update chart
   loadChart();
@@ -62,9 +66,9 @@ addBtn.addEventListener("click", async () => {
   categoryInput.value = "";
 });
 
-// ---------------- LOAD CHART ----------------
+// ================= LOAD CHART =================
 async function loadChart() {
-  const res = await fetch("/chart-data");
+  const res = await fetch(`${BASE_URL}/chart-data`);
   const data = await res.json();
 
   const canvas = document.getElementById("categoryChart");
@@ -80,16 +84,19 @@ async function loadChart() {
     type: "pie",
     data: {
       labels: data.labels,
-      datasets: [{
-        data: data.values,
-        backgroundColor: [
-          "#60a5fa",
-          "#34d399",
-          "#f87171",
-          "#fbbf24",
-          "#a78bfa"
-        ]
-      }]
+      datasets: [
+        {
+          data: data.values,
+          backgroundColor: [
+            "#60a5fa",
+            "#34d399",
+            "#f87171",
+            "#fbbf24",
+            "#a78bfa",
+            "#fb7185"
+          ]
+        }
+      ]
     },
     options: {
       responsive: true,
@@ -114,11 +121,11 @@ async function loadChart() {
   });
 }
 
-// ---------------- RESET DATA ----------------
+// ================= RESET ALL DATA =================
 document.getElementById("resetBtn").addEventListener("click", async () => {
   if (!confirm("Saara data delete ho jayega 😬 Sure?")) return;
 
-  await fetch("/reset", { method: "POST" });
+  await fetch(`${BASE_URL}/reset`, { method: "POST" });
 
   messageBox.innerText = "♻ Data reset successfully";
   memeBox.innerText = "";
@@ -127,5 +134,5 @@ document.getElementById("resetBtn").addEventListener("click", async () => {
   loadChart();
 });
 
-// ---------------- INITIAL LOAD ----------------
+// ================= INITIAL LOAD =================
 loadChart();
