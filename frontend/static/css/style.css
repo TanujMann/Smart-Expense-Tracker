@@ -1,0 +1,108 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #0f172a;
+  color: white;
+  display: flex;
+  justify-content: center;
+  padding-top: 40px;
+}
+
+.container {
+  width: 350px;
+}
+
+h1 {
+  text-align: center;
+  color: #60a5fa;
+}
+
+.subtitle {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #cbd5f5;
+}
+
+.card {
+  background: #1e293b;
+  padding: 26px;
+  border-radius: 12px;
+}
+
+.card label {
+  margin-top: 12px;
+  display: block;
+  font-size: 14px;
+}
+
+.card input,
+.card select {
+  width: 100%;
+  padding: 12px;
+  margin-top: 6px;
+  border-radius: 10px;
+  border: none;
+  font-size: 14px;
+}
+
+button {
+  width: 100%;
+  margin-top: 14px;
+  padding: 12px;
+  background: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #2563eb;
+}
+
+.reset-btn {
+  background: #1e293b;
+  color: #e5e7eb;
+  border: 1px solid #334155;
+}
+
+#message {
+  margin-top: 15px;
+  text-align: center;
+  color: #22c55e;
+}
+
+#memeBox {
+  margin-top: 15px;
+  padding: 12px;
+  background: #1e293b;
+  border-radius: 8px;
+  color: #fbbf24;
+  font-size: 16px;
+  text-align: center;
+}
+
+#aiSummary {
+  background: #0f172a;
+  border-left: 4px solid #38bdf8;
+  padding: 12px;
+  margin-top: 20px;
+  border-radius: 6px;
+  font-size: 15px;
+  color: #e5e7eb;
+}
+
+.chart-container {
+  margin-top: 25px;
+  padding: 20px;
+  background: #0f172a;
+  border-radius: 16px;
+}
+
+canvas {
+  width: 100% !important;
+  height: 300px !important;
+}

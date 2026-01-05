@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Smart Expense Tracker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+  <div class="container">
+    <h1>💸 Smart Expense Tracker</h1>
+    <p class="subtitle">AI-powered expense categorization</p>
+
+    <div class="card">
+      <label>Amount (₹)</label>
+      <input type="number" id="amount" placeholder="Enter amount">
+
+<label>Merchant</label>
+<select id="merchant">
+  <option value="">Select merchant</option>
+  <option value="Swiggy">Swiggy</option>
+  <option value="Zomato">Zomato</option>
+  <option value="Uber">Uber</option>
+  <option value="Ola">Ola</option>
+  <option value="Amazon">Amazon</option>
+  <option value="Flipkart">Flipkart</option>
+  <option value="Netflix">Netflix</option>
+</select>
+
+
+
+      <label>Category (AI Predicted)</label>
+      <input type="text" id="category" readonly>
+
+      <button id="addExpense">➕ Add Expense</button>
+      <button id="resetBtn" class="reset-btn">♻ Reset All Data</button>
+
+    </div>
+
+    <div id="message"></div>
+    <div id="aiSummary" style="margin-top:20px;"></div>
+
+    <div id="memeBox" style="margin-top:15px; font-size:16px;"></div>
+    <div class="chart-container">
+  <canvas id="categoryChart"></canvas>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+ 
+
+</body>
+</html>
